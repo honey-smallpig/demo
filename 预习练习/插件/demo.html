@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h-header></h-header>
+    </div>
+    
+    <script src="../vue.js"></script>
+    <script src="./plugins.js"></script>
+    <script type="text/javascript">
+        //组件不能使用关键字声明
+        Vue.component('h-header',{
+            functional: true,
+            props: ['title'],
+            render(h,context) {
+                console.log(context)
+                return h('h2','msg')
+            }
+         })
+         //混入变量要在实例之前做声明
+         let mymixins = {
+             created () {
+                 this.gethr()
+             },
+             methods: {
+                 gethr() {
+                    console.log('混入对象钩子') 
+                 }
+             },
+         }
+
+         new Vue({
+             el: '#app',
+             mixins: [mymixins]
+             })
+
+         
+    </script>
+</body>
+</html>
